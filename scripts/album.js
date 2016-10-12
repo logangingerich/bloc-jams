@@ -28,6 +28,21 @@ var albumPicasso = {
      ]
  };
 
+ var albumFolds = {
+     title: "Rockin' The Suburbs",
+     artist: 'Ben Folds',
+     label: 'LG Records',
+     year: '2001',
+     albumArtUrl: 'assets/images/album_covers/folds.jpg',
+     songs: [
+         { title: 'Annie Waits', duration: '4:17' },
+         { title: 'Zak and Sara', duration: '3:11' },
+         { title: 'Still Fighting It', duration: '4:25'},
+         { title: 'Gone', duration: '3:22' },
+         { title: 'Fred Jones Part 2', duration: '3:45'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template = 
         '<tr class="album-view-song-item">'
@@ -40,13 +55,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
+var albumImage = document.getElementsByClassName('album-cover-art')[0]; 
+
 var setCurrentAlbum = function(album) {
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-    var albumImage = document.getElementsByClassName('album-cover-art')[0];
     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
     albumTitle.firstChild.nodeValue = album.title;
     albumArtist.firstChild.nodeValue = album.artist;
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
@@ -61,4 +76,11 @@ var setCurrentAlbum = function(album) {
  
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+
+    var album = [albumPicasso, albumMarconi, albumFolds];
+    var i = 0;
+    albumImage.addEventListener("click", function() {
+    setCurrentAlbum(album[i]);
+    i++;
+    });
 };

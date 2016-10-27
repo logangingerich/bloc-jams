@@ -21,16 +21,17 @@ var getSongNumberCell = function(number) {
     return $('.song-item-number[data-song-number="' + number + '"]');
 };
 
-var TogglePlayFromPlayerBar = function() {
+var togglePlayFromPlayerBar = function() {
     if (currentSoundFile && currentSoundFile.isPaused()) {
         getSongNumberCell(currentlyPlayingSongNumber).html(pauseButtonTemplate);
         $(this).html(playerBarPauseButton);
         currentSoundFile.play();  
     }
-    else if (currentSoundFile)
-        getSongNumberCell(currentlyPlayingSongNumber).html(playButtonTemplateButtonTemplate);
+    else if (currentSoundFile) {
+        getSongNumberCell(currentlyPlayingSongNumber).html(playButtonTemplate);
         $(this).html(playerBarPlayButton);
         currentSoundFile.pause(); 
+    } 
 };
 
 var createSongRow = function(songNumber, songName, songLength) {
@@ -179,11 +180,11 @@ var currentSoundFile = null;
 var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
-var placeholder = $('.main-controls .play-pause')
+var placeholder = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
-    placeholder.click(togglePlayFromPlayerBar());
+    placeholder.click(togglePlayFromPlayerBar);
 });
